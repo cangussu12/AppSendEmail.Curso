@@ -1,72 +1,28 @@
 <?php
 
-    class Pai {
-        private $nome = 'jorge';
-        protected $sobrenome = 'Silva';
-        public $humor = 'Feliz';
+class Exemplo {
+    public static $atributo1 = 'Eu sou um atributo estatico';
+    public $atributo2 = 'Eu sou um atributo normal';
 
-
-        public function __get($attr) {
-            return $this->$attr;
-        }
-
-        public function __set($attr, $value) {
-            $this->$attr = $value;
-        }
-
-        private function executarMania() {
-            echo 'Assobiar';
-        }
-
-        protected function responder() {
-            echo ' Oi';
-        }
-
-        public function executarAcao() {
-            $x = rand(1, 10);
-
-            if($x >= 1 && $x <= 8){
-                $this->responder();
-            } else {
-                $this->executarMania();
-            }
-        }   
-    }
-    
-    class Filho extends Pai {
-
-        /*
-        public function getAtributo($attr) {
-            return $this->$attr;
-        }
-
-        public function setAtributo($attr, $value) {
-            $this->$attr = $value;
-        }
-        */
+    public static function metodo1() {
+        echo ' Eu sou um metodo estatico';
     }
 
-    /*
-    $pai = new Pai();
-    
-    echo $pai->executarAcao();
-    */
+    public function metodo2() {
+        echo ' Eu sou um método normal';
+    }
+}
 
-    $filho = new Filho();
+$x = new  Exemplo();
 
-        echo '<pre>';
-        print_r($filho);
-        echo '</pre>';
+/*
+echo Exemplo::$atributo1;
+echo '<br />';
+Exemplo::metodo1();
+*/
 
-        //exibir os métodos do objeto
-        echo '<pre>';
-        print_r(get_class_methods($filho));
-        echo '</pre>';
+//echo Exemplo::metodo2();
 
-        echo $filho->__get('nome');
-        $filho->__set('nome', 'Jamilton');
-        echo '<br />';
-        echo $filho->__get('nome');
+echo $x->atributo2;
 
-        
 ?>
