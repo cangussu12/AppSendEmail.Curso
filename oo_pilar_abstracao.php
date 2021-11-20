@@ -1,28 +1,104 @@
 <?php
 
-class Exemplo {
-    public static $atributo1 = 'Eu sou um atributo estatico';
-    public $atributo2 = 'Eu sou um atributo normal';
+interface EquipamentoEletronicoInterface {
+    public function ligar(); 
+    public function desligar(); 
+}
 
-    public static function metodo1() {
-        echo ' Eu sou um metodo estatico';
+
+// --------------------------------
+
+
+class Geladeira implements EquipamentoEletronicoInterface {
+    public function AbrirPorta() {
+        echo 'Abrir a porta';
     }
 
-    public function metodo2() {
-        echo ' Eu sou um método normal';
+    public function ligar() {
+        echo 'Ligar';
+    }
+
+    public function desligar(){
+        echo 'Desligar';
     }
 }
 
-$x = new  Exemplo();
 
-/*
-echo Exemplo::$atributo1;
-echo '<br />';
-Exemplo::metodo1();
-*/
+class TV implements EquipamentoEletronicoInterface {
+    public function trocarCanal() {
+        echo 'Trocar canal';
+        
+    }
 
-//echo Exemplo::metodo2();
+    public function ligar() {
+        echo 'Ligar';
+    }
 
-echo $x->atributo2;
+    public function desligar(){
+        echo 'Desligar';
+    }
+}
 
+$x = new Geladeira();
+$y = new TV();
+
+// ---------------------
+
+interface MamiferoInterface {
+    public function respirar();
+}
+
+interface TerrestreInterface {
+    public function andar(); 
+}
+
+interface AquaticoInterface {
+    public function nadar();  
+}
+
+class Humano implements MamiferoInterface, TerrestreInterface {
+    public function andar() {
+        echo 'Andar';
+    }
+
+    public function respirar(){
+        echo 'Respirar';
+    }
+
+    public function conversar() {
+        echo 'Conversar';
+    }
+}
+
+class Baleia implements MamiferoInterface, AquaticoInterface {
+    public function nadar() {
+        echo 'Nadar';
+    }
+
+    public function respirar(){
+        echo 'Respirar';
+    }
+
+    protected function esguichar() {
+        echo 'Esguichar';
+    }
+}
+
+interface AnimalInterface {
+    public function comer();
+}
+
+interface AveInterface extends AnimalInterface {
+    public function voar();
+}
+
+class Papagaio implements AveInterface {
+    public function voar() {
+        echo 'Voar';
+    }
+
+    public function comer(){
+        echo 'Comer';
+    }
+}
 ?>
