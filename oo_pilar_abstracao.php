@@ -1,104 +1,63 @@
 <?php
 
-interface EquipamentoEletronicoInterface {
-    public function ligar(); 
-    public function desligar(); 
-}
 
+namespace A;
 
-// --------------------------------
+class Cliente implements \B\CadastroInterface {
+    public $nome = 'Jorge';
 
-
-class Geladeira implements EquipamentoEletronicoInterface {
-    public function AbrirPorta() {
-        echo 'Abrir a porta';
+    public function __construct() {
+        echo '<pre>';
+        print_r(get_class_methods($this));
+        echo '</pre>';
     }
 
-    public function ligar() {
-        echo 'Ligar';
+    public function __get($attr) {
+        return $this->$attr;
     }
 
-    public function desligar(){
-        echo 'Desligar';
+    public function salvar(){
+        echo 'Salvar';
     }
-}
-
-
-class TV implements EquipamentoEletronicoInterface {
-    public function trocarCanal() {
-        echo 'Trocar canal';
-        
-    }
-
-    public function ligar() {
-        echo 'Ligar';
-    }
-
-    public function desligar(){
-        echo 'Desligar';
+    public function remover(){
+        echo 'Remover';
     }
 }
 
-$x = new Geladeira();
-$y = new TV();
-
-// ---------------------
-
-interface MamiferoInterface {
-    public function respirar();
+interface CadastroInterface {
+    public function salvar();
 }
 
-interface TerrestreInterface {
-    public function andar(); 
-}
+namespace B;
 
-interface AquaticoInterface {
-    public function nadar();  
-}
+class Cliente  implements \A\CadastroInterface {
+    public $nome = 'Jamilton';
 
-class Humano implements MamiferoInterface, TerrestreInterface {
-    public function andar() {
-        echo 'Andar';
+    public function __construct() {
+        echo '<pre>';
+        print_r(get_class_methods($this));
+        echo '</pre>';
     }
 
-    public function respirar(){
-        echo 'Respirar';
+    public function __get($attr) {
+        return $this->$attr;
     }
 
-    public function conversar() {
-        echo 'Conversar';
+    public function remover(){
+        echo 'Remover';
+    }
+
+    public function salvar(){
+        echo 'Salvar';
     }
 }
 
-class Baleia implements MamiferoInterface, AquaticoInterface {
-    public function nadar() {
-        echo 'Nadar';
-    }
-
-    public function respirar(){
-        echo 'Respirar';
-    }
-
-    protected function esguichar() {
-        echo 'Esguichar';
-    }
+interface CadastroInterface {
+    public function remover();
 }
 
-interface AnimalInterface {
-    public function comer();
-}
+$c = new Cliente();
+print_r($c);
+echo $c->__get('nome');
 
-interface AveInterface extends AnimalInterface {
-    public function voar();
-}
-
-class Papagaio implements AveInterface {
-    public function voar() {
-        echo 'Voar';
-    }
-
-    public function comer(){
-        echo 'Comer';
-    }
-}
 ?>
