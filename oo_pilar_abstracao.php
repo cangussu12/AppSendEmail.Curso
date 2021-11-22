@@ -1,27 +1,27 @@
 <?php
 
+    class MinhaExceptionCustomizada extends Exception {
+        
+        private $erro = '';
 
-//tenha uma lógica
-try {
-    //tenha uma lógica onde possa ocorrer um potencial erro ( exceção );
-    echo '<h3> *** Try *** </h3> ';
-    //$sql = 'Select * from clientes';
-    //mysql_query($sql); //erro
+        public function __construct($erro) {
+            $this->erro = $erro;
+        }
 
-    if(!file_exists('require_arquivo_a.php')) {
-        throw new Error('O arquivo em questão deveria estar disponível as ' .date('d/m/Y H:i:s') . '(x horas mas não esyava. Vamos seguir mesmo assim.');
+        public function exibirMensagemErroCustomizada() {
+            return $this->erro;
+        }
     }
 
 
-} catch (Error $e) {
-    echo '<h3> *** Catch Error *** </h3> ';
-    echo '<p style="color: red">' . $e; '</p>';
+//tenha uma lógica
+try {
+    
+    throw new MinhaExceptionCustomizada('Esse é um erro de teste');
 
-} catch (Exception $e) {
-    echo '<h3> *** Catch Excessão *** </h3>';
-    echo '<p style="color: red">' . $e; '</p>';
-} finally {
-    echo '<h3> *** Finally *** </h3>';
+
+} catch (MinhaExceptionCustomizada $e) {
+    echo $e->exibirMensagemErroCustomizada();
 }
 
 ?>
