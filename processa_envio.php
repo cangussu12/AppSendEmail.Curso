@@ -55,14 +55,14 @@
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'segredo@gmail.com';                     //SMTP username
-        $mail->Password   = 'secredo';                               //SMTP password
+        $mail->Password   = 'segredo';                               //SMTP password
         $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
         $mail->setFrom('segredo@gmail.com', 'SendMailApp');
         $mail->addAddress('segredo@gmail.com', 'SendMailApp');     //Add a recipient
-        $mail->addAddress('segredo@gmail.com');               //Name is optional
+        $mail->addAddress($mensagem->__get('para'));               //Name is optional
         //$mail->addReplyTo('info@example.com', 'Information');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('bcc@example.com');
@@ -73,12 +73,12 @@
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Oi, eu sou o assunto !';
-        $mail->Body    = '<b>Sou o body</b>';
+        $mail->Subject = $mensagem->__get('assunto');
+        $mail->Body    = $mensagem->__get('mensagem');
         $mail->AltBody = 'Sou o body';
 
         $mail->send();
-        echo 'Não foi possível enviar este e-mail! Por favor tente novamente mais tarde.';
+        echo 'E-mail enviado com sucesso.';
     } catch (Exception $e) {
         echo "Detalhes do erro: {$mail->ErrorInfo}";
     }
