@@ -60,8 +60,8 @@
     </div>
     </body>
 
-    <?  } ?> 
     <? die();?> 
+    <?  } ?> 
 <?
     $mail = new PHPMailer(true);
 
