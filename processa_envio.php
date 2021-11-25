@@ -41,12 +41,28 @@
     $mensagem->__set('mensagem', $_POST['mensagem']);
 
     //print_r($mensagem);
+?>
+    <? if(!$mensagem->mensagemValida()) { ?>
 
-    if(!$mensagem->mensagemValida()) {
-        echo 'Mensagem não é valida';
-        die();
-    } 
+        <html>
+    <head>
+    <meta charset="utf-8" />
+    	<title>App Mail Send</title>
 
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+    <body>
+    <div class="container">
+        <h1 class="display-4 text-danger">Ops!</h1>
+        <p>Existem campos obrigatórios que precisam ser preenchidos</p>
+        <a href="index.php" class="btn btn-success btn-lg mt-5 text-white">Voltar</a>
+    </div>
+    </body>
+
+    <?  } ?> 
+    <? die();?> 
+<?
     $mail = new PHPMailer(true);
 
     try {
